@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 
+    Author: Nikul Ram
+    This page displays the user's profile information.
+    It includes the user's username and email address.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Profile</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="cart.html">Cart</a>
+            <a id="orderHistoryLink" href="order.html">Order History</a>
+            <a href="php/logout.php">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Main content section where profile details will be displayed -->
+    <main>
+        <h2>User Profile</h2>
+        <div id="profileDetails">
+            <!-- Profile details will be loaded here -->
+        </div>
+    </main>
+
+    <!-- JavaScript to handle loading the user profile -->
+    <script>
+        // Event listener to load the profile details on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfile();
+        });
+
+        // Function to load user profile details from the server
+        function loadProfile() {
+            fetch('php/getUserProfile.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.username && data.email) {
+                        document.getElementById('profileDetails').innerHTML = `
+                            <p><strong>Username:</strong> ${data.username}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                        `;
+                    } else {
+                        document.getElementById('profileDetails').innerHTML = '<p>Error loading profile information.</p>';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('profileDetails').innerHTML = '<p>Error loading profile information.</p>';
+                });
+        }
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

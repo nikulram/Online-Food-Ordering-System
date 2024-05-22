@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 
+    Author: Nikul Ram
+    This page displays the user's cart with items they intend to purchase. 
+    It allows users to review their cart and proceed to checkout.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Cart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a id="cartLink" href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+            <span id="userLinks"></span>
+        </nav>
+    </header>
+
+    <!-- Main content section where cart items and total price will be displayed -->
+    <main>
+        <div id="guestReminder" style="display:none;">
+            <p>Please log in to view and place orders in your cart.</p>
+        </div>
+        <div id="cartItems">
+            <!-- Cart items will be dynamically loaded here -->
+        </div>
+        <p>Total: $<span id="totalPrice">0.00</span></p>
+        <button id="checkoutButton" onclick="checkout()">Checkout</button>
+    </main>
+
+    <!-- JavaScript files to handle cart and user session logic -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Function to handle the checkout process
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Cart is empty.');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+
+        // Event listener to update user links on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserLinks();
+        });
+
+        // Function to update user links based on session status
+        function updateUserLinks() {
+            const userLinksDiv = document.getElementById('userLinks');
+            const guestReminder = document.getElementById('guestReminder');
+            const checkoutButton = document.getElementById('checkoutButton');
+
+            fetch('php/checkSession.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        userLinksDiv.innerHTML = `
+                            <a href="php/logout.php">Logout</a>
+                            <a href="profile.html">View Profile</a>
+                            <a href="order.html">Order History</a>
+                        `;
+                        guestReminder.style.display = 'none';
+                        checkoutButton.disabled = false;
+                    } else {
+                        userLinksDiv.innerHTML = '<a href="php/login.php">Login</a>';
+                        guestReminder.style.display = 'block';
+                        checkoutButton.disabled = true;
+                    }
+                });
+        }
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

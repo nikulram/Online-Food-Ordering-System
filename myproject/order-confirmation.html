@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 
+    Author: Nikul Ram
+    This page confirms the successful placement of an order.
+    Users can view their order history from here.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Order Confirmation</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="cart.html">Cart</a>
+            <span id="userLinks"></span>
+        </nav>
+    </header>
+
+    <!-- Main content section confirming the order -->
+    <main>
+        <h2>Thank you for your order!</h2>
+        <p>Your order has been placed successfully.</p>
+        <a href="order.html">View Order History</a>
+    </main>
+
+    <!-- JavaScript files to handle user session logic -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Event listener to update user links on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserLinks();
+        });
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

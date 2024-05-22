@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js" defer></script>
+</head>
+<body>
+    <!-- 
+    Author: Nikul Ram
+    This page displays the user's order history. 
+    Users need to log in to view their past orders.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Order History</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a id="cartLink" href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+            <span id="userLinks"></span>
+        </nav>
+    </header>
+
+    <!-- Main content section where order history will be displayed -->
+    <main>
+        <div id="guestReminder" style="display:none;">
+            <p>Please log in to view your order history.</p>
+        </div>
+        <div id="orderHistory">
+            <!-- Order history will be dynamically loaded here -->
+        </div>
+    </main>
+
+    <!-- JavaScript to handle user session and load order history -->
+    <script>
+        // Event listener to update user links and load order history on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserLinks();
+            loadOrderHistory();
+        });
+
+        // Function to update user links based on session status
+        function updateUserLinks() {
+            const userLinksDiv = document.getElementById('userLinks');
+            fetch('php/checkSession.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        userLinksDiv.innerHTML = `
+                            <a href="php/logout.php">Logout</a>
+                            <a href="profile.html">View Profile</a>
+                            <a href="order.html">Order History</a>
+                        `;
+                    } else {
+                        userLinksDiv.innerHTML = '<a href="php/login.php">Login</a>';
+                        document.getElementById('guestReminder').style.display = 'block';
+                    }
+                });
+        }
+
+        // Function to load order history from the server
+        function loadOrderHistory() {
+            const orderHistoryDiv = document.getElementById('orderHistory');
+            fetch('php/orderHistory.php')
+                .then(response => response.json())
+                .then(data => {
+                    orderHistoryDiv.innerHTML = '';
+                    data.forEach(order => {
+                        const orderDiv = document.createElement('div');
+                        orderDiv.className = 'order';
+                        orderDiv.innerHTML = `
+                            <h3>Order ID: ${order.id}</h3>
+                            <p>Total Price: $${order.total_price}</p>
+                            <p>Status: ${order.status}</p>
+                            <p>Order Date: ${order.order_date}</p>
+                        `;
+                        orderHistoryDiv.appendChild(orderDiv);
+                    });
+                });
+        }
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

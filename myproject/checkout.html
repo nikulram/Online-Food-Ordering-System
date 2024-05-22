@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 
+    Author: Nikul Ram
+    This page handles the checkout process for the user's cart. 
+    It includes a form to collect payment information and any applicable codes.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Checkout</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="cart.html">Cart</a>
+            <a id="orderHistoryLink" href="order.html">Order History</a>
+            <span id="userLinks"></span>
+        </nav>
+    </header>
+
+    <!-- Main content section with the checkout form -->
+    <main>
+        <h2>Checkout</h2>
+        <form id="checkoutForm">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+            <br>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="month" id="expiryDate" name="expiryDate" required>
+            <br>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" required>
+            <br>
+            <label for="redeemCode">Redeem Code:</label>
+            <input type="text" id="redeemCode" name="redeemCode">
+            <br>
+            <label for="giftCard">Gift Card:</label>
+            <input type="text" id="giftCard" name="giftCard">
+            <br>
+            <button type="submit">Place Order</button>
+        </form>
+    </main>
+
+    <!-- JavaScript files to handle user session logic -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Event listener to update user links on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserLinks();
+        });
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

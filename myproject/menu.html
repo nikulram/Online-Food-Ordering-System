@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="menu-page">
+    <!-- 
+    Author: Nikul Ram
+    This page displays the menu categories and items for the Online Food Ordering System.
+    Users can browse and add items to their cart from this page.
+    -->
+
+    <!-- Header section with navigation links -->
+    <header>
+        <h1>Menu</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+            <a href="order.html">Order History</a>
+            <span id="userLinks"></span>
+        </nav>
+    </header>
+
+    <!-- Main content section with categories and items -->
+    <main id="menu">
+        <div id="categories" class="categories"></div>
+        <div id="items" class="items"></div>
+    </main>
+
+    <!-- JavaScript files to handle menu and user session logic -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Event listener to load menu items and update user links on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserLinks();
+            loadMenuItems();
+        });
+
+        // Function to update user links based on session status
+        function updateUserLinks() {
+            const userLinksDiv = document.getElementById('userLinks');
+            fetch('php/checkSession.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.loggedIn) {
+                        userLinksDiv.innerHTML = `
+                            <a href="php/logout.php">Logout</a>
+                            <a href="profile.html">View Profile</a>
+                        `;
+                    } else {
+                        userLinksDiv.innerHTML = `
+                            <a href="php/login.php">Login</a>
+                            <a href="php/signup.php">Sign Up</a>
+                        `;
+                    }
+                });
+        }
+
+        // Function to load menu items and categorize them
+        function loadMenuItems() {
+            fetch('php/getMenuItems.php')
+                .then(response => response.json())
+                .then(data => {
+                    const categoriesDiv = document.getElementById('categories');
+                    const itemsDiv = document.getElementById('items');
+                    categoriesDiv.innerHTML = ''; // Clear existing categories
+                    itemsDiv.innerHTML = ''; // Clear existing items
+
+                    for (const category in data) {
+                        // Create category button
+                        const categoryButton = document.createElement('button');
+                        categoryButton.classList.add('category-button');
+                        categoryButton.textContent = category;
+                        categoryButton.onclick = () => {
+                            showCategoryItems(category, data[category]);
+                        };
+                        categoriesDiv.appendChild(categoryButton);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading menu items:', error);
+                    const menuDiv = document.getElementById('menu');
+                    menuDiv.innerHTML = '<p>Failed to load menu items. Please try again later.</p>';
+                });
+        }
+
+        // Function to display items of a selected category
+        function showCategoryItems(category, items) {
+            const itemsDiv = document.getElementById('items');
+            itemsDiv.innerHTML = `<h2>${category}</h2>`;
+            const row = document.createElement('div');
+            row.classList.add('item-row');
+            items.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('menu-item');
+                itemDiv.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <img src="${item.image_url}" alt="${item.name}" onerror="this.onerror=null; this.src='images/placeholder.jpg';" width="100">
+                    <p>${item.description}</p>
+                    <p>Price: $${item.price}</p>
+                    <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Cart</button>
+                `;
+                row.appendChild(itemDiv);
+                if ((index + 1) % 3 === 0) {
+                    itemsDiv.appendChild(row.cloneNode(true));
+                    row.innerHTML = '';
+                }
+            });
+            if (row.innerHTML) {
+                itemsDiv.appendChild(row);
+            }
+        }
+
+        // Function to add an item to the cart
+        function addToCart(itemId, itemName, itemPrice) {
+            const item = cart.find(i => i.id === itemId);
+            if (item) {
+                item.quantity++;
+            } else {
+                cart.push({ id: itemId, name: itemName, price: itemPrice, quantity: 1 });
+            }
+            saveCart();
+            loadCartItems();
+            updateCartCount();
+        }
+    </script>
+
+    <!-- Footer section with copyright information -->
+    <footer>
+        <p>© 2024 Online Food Ordering System by Nikul Ram</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,218 @@
+/* 
+Author: Nikul Ram
+This CSS file contains styles for the Online Food Ordering System.
+It includes general styles, form styles, table styles, and responsive design adjustments.
+*/
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f1f1f;
+    padding: 1em;
+    text-align: center;
+    color: #ff6600;
+}
+
+nav a {
+    margin: 0 15px;
+    color: #ff6600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #e0e0e0;
+}
+
+main {
+    padding: 2em;
+    text-align: center;
+    background-color: #181818;
+}
+
+footer {
+    background-color: #1f1f1f;
+    padding: 1em;
+    text-align: center;
+    color: #ff6600;
+}
+
+/* Forms */
+form {
+    max-width: 600px;
+    margin: 2em auto;
+    background-color: #1f1f1f;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #e0e0e0;
+}
+
+input[type="text"],
+input[type="month"],
+input[type="password"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #2e2e2e;
+    color: #e0e0e0;
+}
+
+button {
+    background-color: #ff6600;
+    color: #121212;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e65c00;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2em 0;
+    background-color: #1f1f1f;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2e2e2e;
+}
+
+th {
+    background-color: #333333;
+    color: #ff6600;
+}
+
+tr:nth-child(even) {
+    background-color: #2e2e2e;
+}
+
+.category-title {
+    background-color: #333333;
+    color: #ff6600;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px;
+}
+
+.menu-item-row img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* New Styles for the Placeholder Image on the Index Page */
+main img {
+    max-width: 38%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Categories and Items Styles */
+.menu-page .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.menu-page .category-button {
+    background-color: #ff6600;
+    color: #121212;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0.5em;
+    transition: background-color 0.3s ease;
+    flex: 1 1 calc(33% - 1em);
+    max-width: calc(33% - 1em);
+    box-sizing: border-box;
+}
+
+.menu-page .category-button:hover {
+    background-color: #e65c00;
+}
+
+.menu-page .items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.menu-page .item-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.menu-page .menu-item {
+    background-color: #1f1f1f;
+    margin: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: calc(33% - 2em);
+    box-sizing: border-box;
+}
+
+.menu-page .menu-item img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+/* We can adjust styles for smaller screens */
+@media (max-width: 768px) {
+    .menu-page .category-button, .menu-page .menu-item {
+        width: calc(50% - 2em);
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-page .category-button, .menu-page .menu-item {
+        width: 100%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header, main, footer {
+        padding: 1em;
+    }
+
+    form {
+        padding: 1em;
+    }
+}

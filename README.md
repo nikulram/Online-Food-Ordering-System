@@ -31,8 +31,8 @@ The Online Food Ordering System is designed to smooth the process of ordering fo
    - Orders are displayed with details like order ID, user, and status.
 
 3. **Manage Users**
-   - Admins can manage user information and permissions.
-   - Allows viewing and updating user information.
+   - Admins can see user information and permissions.(Can Manage users from databse)
+   - Allows viewing user information.
 
 ### Security Features
 1. **Password Hashing**
@@ -101,7 +101,7 @@ Interested in contributing? Great! Please follow the next steps:
 Fork the repository. Create your feature branch (git checkout -b feature/AmazingFeature). Commit your changes (git commit -m 'Add some AmazingFeature'). Push to the branch (git push origin feature/AmazingFeature). Open a Pull Request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
 - The contributors and maintainers of all used open-source software. 

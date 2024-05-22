@@ -42,12 +42,10 @@ coverage/
 *.exe
 
 # Ignore temporary files created by the operating system
-.swp
-.swo
-.swn
+*.swp
+*.swo
+*.swn
 
-# Ignore generated SQL schema
-schema.sql
-
-# Ignore project documentation
-/docs/
+# Allow schema.sql and docs folder
+!schema.sql
+!docs/

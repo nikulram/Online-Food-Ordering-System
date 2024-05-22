@@ -41,10 +41,6 @@ coverage/
 *.dll
 *.exe
 
-# Ignore specific files for security and environment configuration
-config.php
-database.php
-
 # Ignore temporary files created by the operating system
 .swp
 .swo

@@ -1,5 +1,13 @@
 # Online Food Ordering System by Nikul Ram
 
+## IMPORTANT NOTICE  
+This project is licensed under the MIT License.
+
+If you use, fork, or modify this code, you **must** retain the original copyright notice  
+and **credit the author, Nikul Ram**, in any copies or public versions.
+
+Failure to comply with these terms may result in a formal takedown request in accordance with the license.
+
 ## Overview
 The Online Food Ordering System is designed to smooth the process of ordering food online for both customers and food vendors. It provides a user-friendly platform where customers can browse menus, add items to their cart, and place orders, while vendors can manage their menu and track orders efficiently.
 
